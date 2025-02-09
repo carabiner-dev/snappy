@@ -56,7 +56,9 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 		ID:   spec.ID,
 		Type: spec.Type,
 		Metadata: Metadata{
-			Date: time.Now(),
+			Date:     time.Now(),
+			Endpoint: spec.Endpoint,
+			Method:   spec.Method,
 		},
 		Headers: map[string][]string{},
 		Values:  values,
