@@ -8,9 +8,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
+	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
 	"github.com/carabiner-dev/snappy/pkg/snap"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -18,6 +20,7 @@ import (
 
 type snapOptions struct {
 	SpecPath         string
+	Attest           bool
 	VarSubstitutions []string
 }
 
@@ -40,6 +43,9 @@ func (to *snapOptions) Validate() error {
 func (to *snapOptions) AddFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().StringVarP(
 		&to.SpecPath, "spec", "s", "", "list of hashes to add as subjects ",
+	)
+	cmd.PersistentFlags().StringBoolP(
+		&to.Attest, "attest", "a", "", "write the output as an (unsigned) in-toto attestation",
 	)
 	cmd.PersistentFlags().StringSliceVarP(
 		&to.VarSubstitutions, "var", "v", []string{}, "spec variable subsitutions (--var name=value)",
@@ -94,21 +100,37 @@ func addSnap(parentCmd *cobra.Command) {
 				return fmt.Errorf("parsing predicate file: %w", err)
 			}
 
+			// Create a snapper
 			snapper := snap.New()
+			// ... and snapshot the repo
 			snapshot, err := snapper.Take(context.Background(), spec)
 			if err != nil {
 				logrus.Errorf("taking snapshot: %v", err)
 			}
 
-			// Marshal to JSON
-			enc := json.NewEncoder(os.Stdout)
-			enc.SetIndent("", "  ")
-			if err := enc.Encode(snapshot); err != nil {
-				return fmt.Errorf("encoding snapshot: %w", err)
+			if !opts.Attest {
+				return encodeJSON(snapshot, os.Stdout)
 			}
-			return nil
+
+			// Creat the attestation
+			statement := intoto.NewStatement(
+				intoto.WithPredicate(snapshot),
+			)
+
+			return encodeJSON(statement, os.Stdout)
+
 		},
 	}
 	opts.AddFlags(attCmd)
 	parentCmd.AddCommand(attCmd)
+}
+
+func encodeJSON(what any, output io.Writer) error {
+	// Marshal to JSON
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	if err := enc.Encode(what); err != nil {
+		return fmt.Errorf("encoding to JSON: %w", err)
+	}
+	return nil
 }
