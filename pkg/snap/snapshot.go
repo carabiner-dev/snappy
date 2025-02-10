@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/carabiner-dev/ampel/pkg/attestation"
+	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
+	gointoto "github.com/in-toto/attestation/go/v1"
 	"github.com/sirupsen/logrus"
 )
 
@@ -48,4 +50,21 @@ func (s *Snapshot) GetType() attestation.PredicateType {
 func (s *Snapshot) SetType(t attestation.PredicateType) error {
 	s.Type = string(t)
 	return nil
+}
+
+// AsStatement converts the snapshot to an intoto attestation
+func (s *Snapshot) AsStatement() attestation.Statement {
+	// Create the attestation with the snapshot as predicate
+	statement := intoto.NewStatement(
+		intoto.WithPredicate(s),
+	)
+
+	sbj := gointoto.ResourceDescriptor{
+		Name:   s.ID,
+		Uri:    s.ID,
+		Digest: map[string]string{},
+	}
+	statement.AddSubject(&sbj)
+
+	return statement
 }

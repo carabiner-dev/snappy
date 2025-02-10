@@ -12,9 +12,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
-	gointoto "github.com/in-toto/attestation/go/v1"
-
 	"github.com/carabiner-dev/snappy/pkg/snap"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -110,24 +107,11 @@ func addSnap(parentCmd *cobra.Command) {
 				logrus.Errorf("taking snapshot: %v", err)
 			}
 
-			if !opts.Attest {
-				return encodeJSON(snapshot, os.Stdout)
+			if opts.Attest {
+				return encodeJSON(snapshot.AsStatement(), os.Stdout)
 			}
 
-			// Creat the attestation
-			statement := intoto.NewStatement(
-				intoto.WithPredicate(snapshot),
-			)
-
-			sbj := gointoto.ResourceDescriptor{
-				Name:   snapshot.ID,
-				Uri:    snapshot.ID,
-				Digest: map[string]string{},
-			}
-			statement.AddSubject(&sbj)
-
-			return encodeJSON(statement, os.Stdout)
-
+			return encodeJSON(snapshot, os.Stdout)
 		},
 	}
 	opts.AddFlags(attCmd)
