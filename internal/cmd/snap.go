@@ -44,8 +44,8 @@ func (to *snapOptions) AddFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().StringVarP(
 		&to.SpecPath, "spec", "s", "", "list of hashes to add as subjects ",
 	)
-	cmd.PersistentFlags().StringBoolP(
-		&to.Attest, "attest", "a", "", "write the output as an (unsigned) in-toto attestation",
+	cmd.PersistentFlags().BoolVarP(
+		&to.Attest, "attest", "a", false, "write the output as an (unsigned) in-toto attestation",
 	)
 	cmd.PersistentFlags().StringSliceVarP(
 		&to.VarSubstitutions, "var", "v", []string{}, "spec variable subsitutions (--var name=value)",
@@ -127,7 +127,7 @@ func addSnap(parentCmd *cobra.Command) {
 
 func encodeJSON(what any, output io.Writer) error {
 	// Marshal to JSON
-	enc := json.NewEncoder(os.Stdout)
+	enc := json.NewEncoder(output)
 	enc.SetIndent("", "  ")
 	if err := enc.Encode(what); err != nil {
 		return fmt.Errorf("encoding to JSON: %w", err)

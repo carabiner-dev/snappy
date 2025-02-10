@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 id: https://github.com/{$ORG}/{$REPO}
-type: http://github.com/carabiner-dev/snapi/specs/repo.yaml
+type: http://github.com/carabiner-dev/snappy/specs/repo.yaml
 endpoint: repos/{$ORG}/{$REPO}
 method:  GET
 mask:
