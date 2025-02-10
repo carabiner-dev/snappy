@@ -7,20 +7,11 @@ import (
 	"context"
 	"io"
 	"net/http"
-	"os"
 
 	"github.com/cli/go-gh/v2/pkg/api"
 )
 
-type Options struct {
-	Host  string
-	Token string
-}
-
-var defaultOptions = Options{
-	Host: "api.github.com",
-}
-
+// Replaceable caller interface
 type Caller interface {
 	RequestWithContext(context.Context, string, string, io.Reader) (*http.Response, error)
 }
@@ -32,18 +23,17 @@ func buildGithubRestClient(opts Options) (*api.RESTClient, error) {
 	})
 }
 
-func readToken(opts *Options) {
-	opts.Token = os.Getenv("GITHUB_TOKEN")
-}
-
 func NewClient() (*Client, error) {
 	return NewClientWithOptions(defaultOptions)
 }
 
 func NewClientWithOptions(opts Options) (*Client, error) {
-	if opts.Token == "" {
-		readToken(&defaultOptions)
+	// Ensure the client has a token to connect
+	if err := opts.ensureToken(); err != nil {
+		return nil, err
 	}
+
+	// Create the client
 	rclient, err := buildGithubRestClient(opts)
 	if err != nil {
 		return nil, err
