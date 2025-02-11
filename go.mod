@@ -7,6 +7,7 @@ go 1.23.5
 require (
 	github.com/carabiner-dev/ampel v0.0.0-00010101000000-000000000000
 	github.com/cli/go-gh/v2 v2.11.2
+	github.com/in-toto/attestation v1.1.1-0.20250116170412-11ca4fce9b7a
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
@@ -26,7 +27,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/henvic/httpretty v0.0.6 // indirect
-	github.com/in-toto/attestation v1.1.1-0.20250116170412-11ca4fce9b7a // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/letsencrypt/boulder v0.0.0-20240620165639-de9c06129bec // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
