@@ -37,7 +37,7 @@ builds:
       - -trimpath
 
 archives:
-  - format: binary
+  - formats: binary
     name_template: snappy-{{ .Os }}-{{ .Arch }}
     allow_different_binary_count: true
 
