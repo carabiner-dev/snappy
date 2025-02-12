@@ -29,22 +29,27 @@ jobs:
           go-version-file: go.mod
           cache: false
 
+      - name: Install tejolote
+        uses: kubernetes-sigs/release-actions/setup-tejolote@a69972745f85aab4ba5d6c681e2a0e7f73eaff2b # v0.3.0
+
       - name: Set tag output
         id: tag
         run: echo "tag_name=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
   
-      - name: Install GoReleaser
+      - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@9ed2f89a662bf1735a48bc8557fd212fa902bebf # v6.1.0
+        id: goreleaser
         with:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install tejolote
-        uses: kubernetes-sigs/release-actions/setup-tejolote@a69972745f85aab4ba5d6c681e2a0e7f73eaff2b # v0.3.0
-  
       - name: Generate Provenance
         id: tejolote
         run: |
-            tejolote attest --artifacts github://carabiner-dev/snappy/${{ steps.tag.outputs.tag_name }} github://carabiner-dev/snappy/"${GITHUB_RUN_ID}" --output snappy-${{ steps.tag.outputs.tag_name }}.intoto.json --sign 
+            tejolote attest --artifacts github://${{github.repository}}/${{ steps.tag.outputs.tag_name }} github://${{github.repository}}/"${GITHUB_RUN_ID}" --output snappy-${{ steps.tag.outputs.tag_name }}.intoto.json --sign 
+
+      - name: Publish provenance attestation
+        run: |
+          gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.intoto.json
   
