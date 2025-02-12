@@ -46,10 +46,8 @@ jobs:
 
       - name: Generate Provenance
         id: tejolote
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
             tejolote attest --artifacts github://${{github.repository}}/${{ steps.tag.outputs.tag_name }} github://${{github.repository}}/"${GITHUB_RUN_ID}" --output snappy-${{ steps.tag.outputs.tag_name }}.intoto.json --sign 
-
-      - name: Publish provenance attestation
-        run: |
-          gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.intoto.json
-  
+            gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.intoto.json
