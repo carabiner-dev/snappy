@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
+# SPDX-License-Identifier: Apache-2.0
+---
+id: https://github.com/{$ORG}
+type: http://github.com/carabiner-dev/snappy/specs/org.yaml
+endpoint: orgs/{$ORG}
+method:  GET
+mask:
+  - id
+  - node_id
+  - login
+  - name
+  - is_verified
+  - created_at
+  - updated_at
+  - archived_at
+  - default_repository_permission
+  - members_can_create_repositories
+  - two_factor_requirement_enabled
+  - members_allowed_repository_creation_type
+  - members_can_create_public_repositories
+  - members_can_create_private_repositories
+  - members_can_create_internal_repositories
+  - web_commit_signoff_required
+  - deploy_keys_enabled_for_repositories
