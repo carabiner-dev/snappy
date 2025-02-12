@@ -29,6 +29,9 @@ jobs:
           go-version-file: go.mod
           cache: false
 
+      - name: Setup bnd
+        uses: carabiner-dev/bnd-actions/setup@HEAD
+
       - name: Install tejolote
         uses: kubernetes-sigs/release-actions/setup-tejolote@a69972745f85aab4ba5d6c681e2a0e7f73eaff2b # v0.3.0
 
@@ -49,5 +52,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-            tejolote attest --artifacts github://${{github.repository}}/${{ steps.tag.outputs.tag_name }} github://${{github.repository}}/"${GITHUB_RUN_ID}" --output snappy-${{ steps.tag.outputs.tag_name }}.intoto.json --sign 
-            gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.intoto.json
+            tejolote attest --artifacts github://${{github.repository}}/${{ steps.tag.outputs.tag_name }} github://${{github.repository}}/"${GITHUB_RUN_ID}" --output provenance.json
+            bnd statement provenance.json -o snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
+            gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
+            bnd push ${{github.repository}} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
+
