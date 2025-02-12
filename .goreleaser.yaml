@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
+# SPDX-License-Identifier: Apache-2.0
+
+project_name: snappy
+version: 2
+
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+
+before:
+  hooks:
+    - go mod tidy
+    - /bin/bash -c 'if [ -n "$(git --no-pager diff --exit-code go.mod go.sum)" ]; then exit 1; fi'
+
+gomod:
+  proxy: true
+
+builds:
+  - id: snappy
+    no_unique_dist_dir: true
+    binary: snappy-{{ .Arch }}-{{ .Os }}
+    main: .
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+      - goos: darwin
+        goarch: amd64
+    flags:
+      - -trimpath
+
+archives:
+  - format: binary
+    name_template: snappy-{{ .Arch }}-{{ .Os }}
+    allow_different_binary_count: true
+
+release:
+  github:
+    owner: carabiner-dev
+    name: snappy
+  prerelease: auto
+
+changelog:
+  disable: true
