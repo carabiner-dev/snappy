@@ -19,7 +19,7 @@ gomod:
 builds:
   - id: snappy
     no_unique_dist_dir: true
-    binary: snappy-{{ .Arch }}-{{ .Os }}
+    binary: snappy-{{ .Os }}-{{ .Arch }}
     main: .
     goos:
       - darwin
@@ -38,7 +38,7 @@ builds:
 
 archives:
   - format: binary
-    name_template: snappy-{{ .Arch }}-{{ .Os }}
+    name_template: snappy-{{ .Os }}-{{ .Arch }}
     allow_different_binary_count: true
 
 release:
