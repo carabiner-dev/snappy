@@ -36,6 +36,9 @@ jobs:
       - name: Install tejolote
         uses: kubernetes-sigs/release-actions/setup-tejolote@a69972745f85aab4ba5d6c681e2a0e7f73eaff2b # v0.3.0
 
+      - name: Install bom
+        uses: kubernetes-sigs/release-actions/setup-bom@a69972745f85aab4ba5d6c681e2a0e7f73eaff2b # v0.3.0
+
       - name: Set tag output
         id: tag
         run: echo "tag_name=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
@@ -59,3 +62,9 @@ jobs:
             gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
             bnd push ${{github.repository}} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
 
+      - name: Generate SBOM
+        shell: bash
+        run: |
+          bom generate --format=json -o /tmp/snappy-${{ steps.tag.outputs.tag_name }}.spdx.json .
+          gh release upload ${{ steps.tag.outputs.tag_name }} /tmp/snappy-${{ steps.tag.outputs.tag_name }}.spdx.json
+          
