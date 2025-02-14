@@ -4,6 +4,7 @@ go 1.23.5
 
 require (
 	github.com/carabiner-dev/ampel v0.0.0-20250209210344-7b306497c927
+	github.com/carabiner-dev/yamplate v0.1.1
 	github.com/cli/go-gh/v2 v2.11.2
 	github.com/in-toto/attestation v1.1.1-0.20250116170412-11ca4fce9b7a
 	github.com/sirupsen/logrus v1.9.3
