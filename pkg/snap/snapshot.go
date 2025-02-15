@@ -68,6 +68,12 @@ func (s *Snapshot) AsStatement() attestation.Statement {
 	var reader = strings.NewReader(s.ID)
 	hshr := hasher.New()
 
+	// The GitHub attestations store only supports a single
+	// digest. This means that for now we'll just use sha256.
+	hshr.Options.Algorithms = []gointoto.HashAlgorithm{
+		gointoto.AlgorithmSHA256,
+	}
+
 	var sbj *gointoto.ResourceDescriptor
 
 	hashes, err := hshr.HashReaders([]io.Reader{reader})
