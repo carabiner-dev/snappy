@@ -4,9 +4,10 @@ go 1.23.5
 
 require (
 	github.com/carabiner-dev/ampel v0.0.0-20250209210344-7b306497c927
+	github.com/carabiner-dev/hasher v0.1.0
 	github.com/carabiner-dev/yamplate v0.1.1
 	github.com/cli/go-gh/v2 v2.11.2
-	github.com/in-toto/attestation v1.1.1-0.20250116170412-11ca4fce9b7a
+	github.com/in-toto/attestation v1.1.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.1
 	sigs.k8s.io/release-utils v0.11.0
@@ -29,6 +30,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
+	github.com/nozzle/throttler v0.0.0-20180817012639-2ea982251481 // indirect
 	github.com/openvex/go-vex v0.2.5 // indirect
 	github.com/package-url/packageurl-go v0.1.1 // indirect
 	github.com/protobom/protobom v0.5.0 // indirect
@@ -41,10 +43,10 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e // indirect
 	github.com/titanous/rocacheck v0.0.0-20171023193734-afe73141d399 // indirect
-	golang.org/x/crypto v0.32.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/term v0.28.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/crypto v0.33.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/term v0.29.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 	google.golang.org/protobuf v1.36.3 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

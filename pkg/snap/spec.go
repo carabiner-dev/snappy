@@ -10,7 +10,13 @@ import (
 )
 
 type Spec struct {
+	// ID is the string that will be used to generate the subject's
+	// hash when generating an attestation. It should identify the
+	// object described by the data returned by the API call. This
+	// ID MUST be unique for each isntance.
 	ID       string   `json:"id"`
+	Name     string   `json:"name"`
+	Url      string   `json:"url"`
 	Type     string   `json:"type"`
 	Endpoint string   `json:"endpoint"`
 	Method   string   `json:"method"`

@@ -54,6 +54,8 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 
 	snapshot := &Snapshot{
 		ID:   spec.ID,
+		Name: spec.Name,
+		Url:  spec.Url,
 		Type: spec.Type,
 		Metadata: Metadata{
 			Date:     time.Now(),

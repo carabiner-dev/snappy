@@ -1,7 +1,9 @@
 # SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
 # SPDX-License-Identifier: Apache-2.0
 ---
-id: https://github.com/${ORG}/${REPO}
+id: github.com/${ORG}/${REPO}
+name: github.com/${ORG}/${REPO}
+url: git+https://github.com/${ORG}/${REPO}
 type: http://github.com/carabiner-dev/snappy/specs/repo.yaml
 endpoint: repos/${ORG}/${REPO}
 method:  GET

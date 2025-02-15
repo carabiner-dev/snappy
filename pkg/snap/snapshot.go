@@ -6,16 +6,21 @@ package snap
 import (
 	"bytes"
 	"encoding/json"
+	"io"
+	"strings"
 	"time"
 
 	"github.com/carabiner-dev/ampel/pkg/attestation"
 	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
+	"github.com/carabiner-dev/hasher"
 	gointoto "github.com/in-toto/attestation/go/v1"
 	"github.com/sirupsen/logrus"
 )
 
 type Snapshot struct {
 	ID       string            `json:"id"`
+	Name     string            `json:"name"`
+	Url      string            `json:"url"`
 	Type     string            `json:"type"`
 	Metadata Metadata          `json:"metadata"`
 	Headers  map[string]string `json:"headers"`
@@ -59,12 +64,25 @@ func (s *Snapshot) AsStatement() attestation.Statement {
 		intoto.WithPredicate(s),
 	)
 
-	sbj := gointoto.ResourceDescriptor{
-		Name:   s.ID,
-		Uri:    s.ID,
-		Digest: map[string]string{},
-	}
-	statement.AddSubject(&sbj)
+	// Create a hasher to hash the ID
+	var reader = strings.NewReader(s.ID)
+	hshr := hasher.New()
 
+	var sbj *gointoto.ResourceDescriptor
+
+	hashes, err := hshr.HashReaders([]io.Reader{reader})
+	if err != nil {
+		logrus.Errorf("error hashing snapshot id: %v", err)
+		sbj = &gointoto.ResourceDescriptor{
+			Name: s.ID,
+			Uri:  s.ID,
+		}
+	} else {
+		sbj = hashes.ToResourceDescriptors()[0]
+		sbj.Name = s.Name
+		sbj.Uri = s.Url
+	}
+
+	statement.AddSubject(sbj)
 	return statement
 }
