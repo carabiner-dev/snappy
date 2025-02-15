@@ -4,6 +4,7 @@
 package cmd
 
 import (
+	"embed"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -38,12 +39,12 @@ func initLogging(*cobra.Command, []string) error {
 }
 
 // Execute builds the command
-func Execute() {
+func Execute(fs *embed.FS) {
 	rootCmd.PersistentFlags().StringVar(
 		&commandLineOpts.logLevel,
 		"log-level", "info", fmt.Sprintf("the logging verbosity, either %s", log.LevelNames()),
 	)
-	addSnap(rootCmd)
+	addSnap(rootCmd, fs)
 	rootCmd.AddCommand(version.WithFont("doom"))
 
 	if err := rootCmd.Execute(); err != nil {

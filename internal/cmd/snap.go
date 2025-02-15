@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"context"
+	"embed"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -51,7 +52,7 @@ func (to *snapOptions) AddFlags(cmd *cobra.Command) {
 	)
 }
 
-func addSnap(parentCmd *cobra.Command) {
+func addSnap(parentCmd *cobra.Command, specsFS *embed.FS) {
 	opts := &snapOptions{}
 	attCmd := &cobra.Command{
 		Short:             "takes a snapshot of an API response",
@@ -70,16 +71,24 @@ func addSnap(parentCmd *cobra.Command) {
 			}
 			return nil
 		},
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Validate the options
 			if err := opts.Validate(); err != nil {
 				return err
 			}
 			cmd.SilenceUsage = true
 
-			f, err := os.Open(opts.SpecPath)
-			if err != nil {
-				return fmt.Errorf("opening spec: %w", err)
+			var f io.ReadCloser
+			if strings.HasPrefix(opts.SpecPath, "builtin:") {
+				f, err = specsFS.Open("specs/" + strings.TrimPrefix(opts.SpecPath, "builtin:"))
+				if err != nil {
+					return fmt.Errorf("opening internal spec: %w", err)
+				}
+			} else {
+				f, err = os.Open(opts.SpecPath)
+				if err != nil {
+					return fmt.Errorf("opening spec: %w", err)
+				}
 			}
 			defer f.Close()
 
