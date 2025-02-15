@@ -19,6 +19,7 @@ type ParseOptions struct {
 	Variables map[string]string
 }
 
+// ParseWithOptions parses a spec yaml definition.
 func (sp *SpecParser) ParseWithOptions(r io.Reader, opts *ParseOptions) (*Spec, error) {
 	// Build the parser and
 	decoder := yaml.NewDecoder(r)

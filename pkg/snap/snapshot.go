@@ -15,11 +15,11 @@ import (
 )
 
 type Snapshot struct {
-	ID       string              `json:"id"`
-	Type     string              `json:"type"`
-	Metadata Metadata            `json:"metadata"`
-	Headers  map[string][]string `json:"headers"`
-	Values   map[string]any      `json:"values"`
+	ID       string            `json:"id"`
+	Type     string            `json:"type"`
+	Metadata Metadata          `json:"metadata"`
+	Headers  map[string]string `json:"headers"`
+	Values   map[string]any    `json:"values"`
 }
 
 type Metadata struct {

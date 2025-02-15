@@ -60,13 +60,19 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 			Endpoint: spec.Endpoint,
 			Method:   spec.Method,
 		},
-		Headers: map[string][]string{},
+		Headers: map[string]string{},
 		Values:  values,
 	}
 
 	for k, v := range resp.Header {
 		if slices.Contains(opts.ResponseHeaders, k) {
-			snapshot.Headers[k] = v
+			for _, content := range v {
+				if _, ok := snapshot.Headers[k]; !ok {
+					snapshot.Headers[k] = content
+				} else {
+					snapshot.Headers[k] = "; " + content
+				}
+			}
 		}
 	}
 
