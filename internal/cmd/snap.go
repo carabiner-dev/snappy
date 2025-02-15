@@ -114,6 +114,7 @@ func addSnap(parentCmd *cobra.Command, specsFS *embed.FS) {
 			snapshot, err := snapper.Take(context.Background(), spec)
 			if err != nil {
 				logrus.Errorf("taking snapshot: %v", err)
+				return err
 			}
 
 			if opts.Attest {
