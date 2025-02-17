@@ -9,7 +9,7 @@ require (
 	github.com/cli/go-gh/v2 v2.11.2
 	github.com/in-toto/attestation v1.1.1
 	github.com/sirupsen/logrus v1.9.3
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.9.1
 	sigs.k8s.io/release-utils v0.11.0
 )
 
@@ -40,7 +40,7 @@ require (
 	github.com/sigstore/sigstore v1.8.12 // indirect
 	github.com/sigstore/sigstore-go v0.7.0 // indirect
 	github.com/spdx/tools-golang v0.5.5 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e // indirect
 	github.com/titanous/rocacheck v0.0.0-20171023193734-afe73141d399 // indirect
 	golang.org/x/crypto v0.33.0 // indirect
