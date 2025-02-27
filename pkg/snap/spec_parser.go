@@ -6,14 +6,11 @@ package snap
 import (
 	"fmt"
 	"io"
-	"regexp"
 
 	yaml "github.com/carabiner-dev/yamplate"
 )
 
 type SpecParser struct{}
-
-var variableRegex *regexp.Regexp
 
 type ParseOptions struct {
 	Variables map[string]string
