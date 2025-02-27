@@ -65,7 +65,7 @@ func (s *Snapshot) AsStatement() attestation.Statement {
 	)
 
 	// Create a hasher to hash the ID
-	var reader = strings.NewReader(s.ID)
+	reader := strings.NewReader(s.ID)
 	hshr := hasher.New()
 
 	// The GitHub attestations store only supports a single

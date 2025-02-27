@@ -100,7 +100,7 @@ linters-settings:
     sections:
       - standard
       - default
-      - prefix(github.com/protobom/protobom)
+      - prefix(github.com/carabiner-dev/snappy)
 
     section-separators:
       - newLine
