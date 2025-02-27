@@ -32,5 +32,10 @@ func (sp *SpecParser) ParseWithOptions(r io.Reader, opts *ParseOptions) (*Spec, 
 		return nil, fmt.Errorf("parsing yaml spec: %w", err)
 	}
 
+	// Default to payloads of type struct
+	if spec.PayloadType == "" {
+		spec.PayloadType = PayloadTypeStruct
+	}
+
 	return spec, nil
 }

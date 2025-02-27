@@ -6,6 +6,7 @@ package snap
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -40,7 +41,15 @@ func (di *defaultImplementation) CallAPI(ctx context.Context, client *github.Cli
 
 // ParseResponse extracts the data from the response and returns the snapshot
 func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *http.Response) (*Snapshot, error) {
-	values := map[string]any{}
+	var values any
+	switch spec.PayloadType {
+	case PayloadTypeStruct:
+		values = map[string]any{}
+	case PayloadTypeArray:
+		values = []any{}
+	default:
+		return nil, fmt.Errorf("unknown payload type, must be %+v", PayloadTypes)
+	}
 
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("http error %d received from API", resp.StatusCode)
@@ -82,6 +91,7 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 	if err := json.Unmarshal(data, &values); err != nil {
 		return nil, fmt.Errorf("unmarshaling response data: %w", err)
 	}
+	snapshot.Values = values
 
 	// Done, return the new snapshot
 	return snapshot, nil
@@ -89,7 +99,11 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 
 func (di *defaultImplementation) ApplyFieldMask(snapshot *Snapshot, fieldmap []string) (*Snapshot, error) {
 	newValues := map[string]any{}
-	for k, val := range snapshot.Values {
+	vals, ok := snapshot.Values.(map[string]any)
+	if !ok {
+		return nil, errors.New("unable to cast snapped values")
+	}
+	for k, val := range vals {
 		if slices.Contains(fieldmap, k) {
 			newValues[k] = val
 		}

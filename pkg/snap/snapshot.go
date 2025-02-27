@@ -24,7 +24,7 @@ type Snapshot struct {
 	Type     string            `json:"type"`
 	Metadata Metadata          `json:"metadata"`
 	Headers  map[string]string `json:"headers"`
-	Values   map[string]any    `json:"values"`
+	Values   any               `json:"values"`
 }
 
 type Metadata struct {

@@ -53,9 +53,11 @@ func (s *Snapper) Take(ctx context.Context, spec *Spec) (*Snapshot, error) {
 		return nil, fmt.Errorf("parsing API response: %w", err)
 	}
 
-	snapshot, err = s.implementation.ApplyFieldMask(snapshot, spec.Mask)
-	if err != nil {
-		return nil, fmt.Errorf("applying field mask: %w", err)
+	if spec.PayloadType == PayloadTypeStruct {
+		snapshot, err = s.implementation.ApplyFieldMask(snapshot, spec.Mask)
+		if err != nil {
+			return nil, fmt.Errorf("applying field mask: %w", err)
+		}
 	}
 
 	return snapshot, nil

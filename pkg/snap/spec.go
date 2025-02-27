@@ -6,21 +6,30 @@ package snap
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 )
+
+const (
+	PayloadTypeStruct = "struct"
+	PayloadTypeArray  = "array"
+)
+
+var PayloadTypes = []string{PayloadTypeStruct, PayloadTypeArray}
 
 type Spec struct {
 	// ID is the string that will be used to generate the subject's
 	// hash when generating an attestation. It should identify the
 	// object described by the data returned by the API call. This
-	// ID MUST be unique for each isntance.
-	ID       string   `json:"id"`
-	Name     string   `json:"name"`
-	Url      string   `json:"url"`
-	Type     string   `json:"type"`
-	Endpoint string   `json:"endpoint"`
-	Method   string   `json:"method"`
-	Mask     []string `json:"mask"`
+	// ID MUST be unique for each instance the API returns.
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	Url         string   `json:"url"`
+	Type        string   `json:"type"`
+	Endpoint    string   `json:"endpoint"`
+	Method      string   `json:"method"`
+	PayloadType string   `json:"payload" yaml:"payload"`
+	Mask        []string `json:"mask"`
 }
 
 func (spec *Spec) Validate() error {
@@ -36,8 +45,16 @@ func (spec *Spec) Validate() error {
 		errs = append(errs, errors.New("endpoint should be a relative path"))
 	}
 
-	if len(spec.Mask) == 0 {
-		return fmt.Errorf("at least one entry in the field mask should be set")
+	if spec.PayloadType != "" && !slices.Contains(PayloadTypes, spec.PayloadType) {
+		errs = append(errs, fmt.Errorf("unsupported payload type must be: %+v", PayloadTypes))
+	}
+
+	if spec.PayloadType == PayloadTypeArray && len(spec.Mask) > 0 {
+		errs = append(errs, errors.New("field mask not supported when payload is an array"))
+	}
+
+	if spec.PayloadType == PayloadTypeStruct && len(spec.Mask) == 0 {
+		errs = append(errs, fmt.Errorf("at least one entry in the field mask should be set"))
 	}
 
 	return errors.Join(errs...)
