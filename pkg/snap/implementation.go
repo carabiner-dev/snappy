@@ -45,7 +45,6 @@ func (di *defaultImplementation) CallAPI(ctx context.Context, client *github.Cli
 			data = regexp.MustCompile(`\r\n|[\r\n\v\f\x{0085}\x{2028}\x{2029}]`).
 				ReplaceAllString(data, "")
 		}
-		fmt.Println(data)
 		if spec.Method != http.MethodPost {
 			return nil, fmt.Errorf("when posting data, method must be POST")
 		}
