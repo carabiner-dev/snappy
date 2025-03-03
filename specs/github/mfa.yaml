@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
+# SPDX-License-Identifier: Apache-2.0
+---
+id: github.com/${ORG}#mfa
+name: github.com/${ORG}
+url: https://github.com/${ORG}
+type: http://github.com/carabiner-dev/snappy/specs/mfa.yaml
+endpoint: graphql 
+method:  POST
+mask:
+  - data
+trimNL: true
+data: |
+  {
+    "query": "
+      query {
+        organization (login: \"${ORG}\") {
+          login,
+          membersWithRole (first: 100) {
+            totalCount
+            edges {
+              hasTwoFactorEnabled
+              role { __typename}
+              node { login }
+            }
+          }
+        }
+    }"
+  }
