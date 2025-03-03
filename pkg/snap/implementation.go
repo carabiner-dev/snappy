@@ -10,7 +10,9 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"regexp"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/carabiner-dev/snappy/pkg/github"
@@ -36,7 +38,20 @@ func (di *defaultImplementation) GetClient() (*github.Client, error) {
 }
 
 func (di *defaultImplementation) CallAPI(ctx context.Context, client *github.Client, spec *Spec) (*http.Response, error) {
-	return client.Call(ctx, spec.Method, spec.Endpoint, nil)
+	var r io.Reader
+	if spec.Data != "" {
+		data := spec.Data
+		if spec.TrimNL {
+			data = regexp.MustCompile(`\r\n|[\r\n\v\f\x{0085}\x{2028}\x{2029}]`).
+				ReplaceAllString(data, "")
+		}
+		fmt.Println(data)
+		if spec.Method != http.MethodPost {
+			return nil, fmt.Errorf("when posting data, method must be POST")
+		}
+		r = strings.NewReader(data)
+	}
+	return client.Call(ctx, spec.Method, spec.Endpoint, r)
 }
 
 // ParseResponse extracts the data from the response and returns the snapshot

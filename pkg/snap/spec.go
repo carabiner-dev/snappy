@@ -30,6 +30,8 @@ type Spec struct {
 	Method      string   `json:"method"`
 	PayloadType string   `json:"payload" yaml:"payload"`
 	Mask        []string `json:"mask"`
+	Data        string   `json:"data"`
+	TrimNL      bool     `json:"trimNL" yaml:"trimNL"`
 }
 
 func (spec *Spec) Validate() error {
@@ -55,6 +57,10 @@ func (spec *Spec) Validate() error {
 
 	if spec.PayloadType == PayloadTypeStruct && len(spec.Mask) == 0 {
 		errs = append(errs, fmt.Errorf("at least one entry in the field mask should be set"))
+	}
+
+	if spec.Data != "" && spec.Method != "POST" {
+		errs = append(errs, errors.New("data can only be specified with method POST"))
 	}
 
 	return errors.Join(errs...)
