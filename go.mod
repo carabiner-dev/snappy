@@ -1,6 +1,7 @@
 module github.com/carabiner-dev/snappy
 
 go 1.23.5
+toolchain go1.24.1
 
 require (
 	github.com/carabiner-dev/ampel v0.0.0-20250209210344-7b306497c927
@@ -10,7 +11,7 @@ require (
 	github.com/in-toto/attestation v1.1.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
-	sigs.k8s.io/release-utils v0.11.0
+	sigs.k8s.io/release-utils v0.11.1
 )
 
 require (
