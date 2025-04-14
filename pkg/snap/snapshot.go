@@ -57,6 +57,18 @@ func (s *Snapshot) SetType(t attestation.PredicateType) error {
 	return nil
 }
 
+func (s *Snapshot) SetSource(attestation.Subject) {
+
+}
+
+func (s *Snapshot) GetSource() attestation.Subject {
+	return nil
+}
+
+func (s *Snapshot) GetVerifications() []*attestation.SignatureVerification {
+	return nil
+}
+
 // AsStatement converts the snapshot to an intoto attestation
 func (s *Snapshot) AsStatement() attestation.Statement {
 	// Create the attestation with the snapshot as predicate
