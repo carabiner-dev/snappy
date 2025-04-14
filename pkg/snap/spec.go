@@ -6,6 +6,7 @@ package snap
 import (
 	"errors"
 	"fmt"
+	"net/http"
 	"slices"
 	"strings"
 )
@@ -28,7 +29,7 @@ type Spec struct {
 	Type        string   `json:"type"`
 	Endpoint    string   `json:"endpoint"`
 	Method      string   `json:"method"`
-	PayloadType string   `json:"payload" yaml:"payload"`
+	PayloadType string   `json:"payload" yaml:"payload"` //nolint:tagalign
 	Mask        []string `json:"mask"`
 	Data        string   `json:"data"`
 	TrimNL      bool     `json:"trimNL" yaml:"trimNL"`
@@ -36,7 +37,7 @@ type Spec struct {
 
 func (spec *Spec) Validate() error {
 	errs := []error{}
-	if spec.Method != "" && spec.Method != "POST" && spec.Method != "GET" {
+	if spec.Method != "" && spec.Method != http.MethodPost && spec.Method != http.MethodGet {
 		errs = append(errs, errors.New("wrong method, it shoud be POST or GET"))
 	}
 	if spec.Endpoint == "" {

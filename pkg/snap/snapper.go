@@ -46,7 +46,7 @@ func (s *Snapper) Take(ctx context.Context, spec *Spec) (*Snapshot, error) {
 	if err != nil {
 		return nil, fmt.Errorf("calling API: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	snapshot, err := s.implementation.ParseResponse(&s.Options, spec, resp)
 	if err != nil {

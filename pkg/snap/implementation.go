@@ -65,10 +65,10 @@ func (di *defaultImplementation) ParseResponse(opts *Options, spec *Spec, resp *
 		return nil, fmt.Errorf("unknown payload type, must be %+v", PayloadTypes)
 	}
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("http error %d received from API", resp.StatusCode)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {

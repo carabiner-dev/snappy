@@ -90,7 +90,7 @@ func addSnap(parentCmd *cobra.Command, specsFS *embed.FS) {
 					return fmt.Errorf("opening spec: %w", err)
 				}
 			}
-			defer f.Close()
+			defer f.Close() //nolint:errcheck
 
 			parseOpts := &snap.ParseOptions{
 				Variables: map[string]string{},
