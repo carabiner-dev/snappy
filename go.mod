@@ -1,29 +1,28 @@
 module github.com/carabiner-dev/snappy
 
 go 1.23.5
-
 toolchain go1.24.1
 
 require (
-	github.com/carabiner-dev/ampel v0.0.0-20250209210344-7b306497c927
+	github.com/carabiner-dev/ampel v0.0.1-pre3
 	github.com/carabiner-dev/hasher v0.1.0
 	github.com/carabiner-dev/yamplate v0.1.1
 	github.com/cli/go-gh/v2 v2.12.0
-	github.com/in-toto/attestation v1.1.1
+	github.com/in-toto/attestation v1.1.2-0.20250128181946-c0b4d86cf712
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
-	sigs.k8s.io/release-utils v0.11.0
+	sigs.k8s.io/release-utils v0.11.1
 )
 
 require (
-	github.com/CycloneDX/cyclonedx-go v0.9.1 // indirect
+	github.com/CycloneDX/cyclonedx-go v0.9.2 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
 	github.com/cli/safeexec v1.0.0 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
 	github.com/go-jose/go-jose/v4 v4.0.2 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/henvic/httpretty v0.0.6 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -34,7 +33,7 @@ require (
 	github.com/nozzle/throttler v0.0.0-20180817012639-2ea982251481 // indirect
 	github.com/openvex/go-vex v0.2.5 // indirect
 	github.com/package-url/packageurl-go v0.1.1 // indirect
-	github.com/protobom/protobom v0.5.0 // indirect
+	github.com/protobom/protobom v0.5.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.13.1 // indirect
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0 // indirect
@@ -48,7 +47,7 @@ require (
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/term v0.30.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
-	google.golang.org/protobuf v1.36.3 // indirect
+	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
