@@ -32,7 +32,7 @@ type Spec struct {
 	PayloadType string   `json:"payload" yaml:"payload"` //nolint:tagalign
 	Mask        []string `json:"mask"`
 	Data        string   `json:"data"`
-	TrimNL      bool     `json:"trimNL" yaml:"trimNL"`
+	TrimNL      bool     `json:"trimNL"   yaml:"trimNL"`
 }
 
 func (spec *Spec) Validate() error {
@@ -60,7 +60,7 @@ func (spec *Spec) Validate() error {
 		errs = append(errs, fmt.Errorf("at least one entry in the field mask should be set"))
 	}
 
-	if spec.Data != "" && spec.Method != "POST" {
+	if spec.Data != "" && spec.Method != http.MethodPost {
 		errs = append(errs, errors.New("data can only be specified with method POST"))
 	}
 
