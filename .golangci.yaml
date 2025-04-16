@@ -27,7 +27,7 @@ formatters:
       sections:
         - standard
         - default
-        - prefix(github.com/carabiner-dev/drop)
+        - prefix(github.com/carabiner-dev/snappy)
 linters:
   enable:
     - asasalint

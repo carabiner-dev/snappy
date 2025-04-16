@@ -58,7 +58,6 @@ func (s *Snapshot) SetType(t attestation.PredicateType) error {
 }
 
 func (s *Snapshot) SetSource(attestation.Subject) {
-
 }
 
 func (s *Snapshot) GetSource() attestation.Subject {

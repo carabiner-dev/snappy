@@ -13,9 +13,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/carabiner-dev/snappy/pkg/snap"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	"github.com/carabiner-dev/snappy/pkg/snap"
 )
 
 type snapOptions struct {
