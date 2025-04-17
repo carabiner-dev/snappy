@@ -9,6 +9,7 @@ endpoint: graphql
 method:  POST
 mask:
   - data
+  - errors
 trimNL: true
 data: |
   {
@@ -20,7 +21,7 @@ data: |
             totalCount
             edges {
               hasTwoFactorEnabled
-              role { __typename}
+              role
               node { login }
             }
           }
