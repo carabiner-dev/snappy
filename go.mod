@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/carabiner-dev/ampel v0.0.1-pre3.0.20250412192624-1e76e6656e64
-	github.com/carabiner-dev/hasher v0.1.0
+	github.com/carabiner-dev/hasher v0.2.2
 	github.com/carabiner-dev/yamplate v0.1.1
 	github.com/cli/go-gh/v2 v2.12.0
 	github.com/in-toto/attestation v1.1.2-0.20250128181946-c0b4d86cf712
@@ -44,10 +44,10 @@ require (
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e // indirect
 	github.com/titanous/rocacheck v0.0.0-20171023193734-afe73141d399 // indirect
-	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/crypto v0.37.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/term v0.31.0 // indirect
+	golang.org/x/text v0.24.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
