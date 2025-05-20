@@ -1,11 +1,9 @@
 module github.com/carabiner-dev/snappy
 
-go 1.24
-
-toolchain go1.24.1
+go 1.24.1
 
 require (
-	github.com/carabiner-dev/ampel v0.0.1-pre3.0.20250412192624-1e76e6656e64
+	github.com/carabiner-dev/ampel v0.0.1-pre9
 	github.com/carabiner-dev/hasher v0.2.2
 	github.com/carabiner-dev/yamplate v0.1.1
 	github.com/cli/go-gh/v2 v2.12.0
@@ -18,11 +16,12 @@ require (
 require (
 	github.com/CycloneDX/cyclonedx-go v0.9.2 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
+	github.com/carabiner-dev/openeox v0.0.0-20250430212020-e3a5beb42ddd // indirect
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
 	github.com/cli/safeexec v1.0.0 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
-	github.com/go-jose/go-jose/v4 v4.0.2 // indirect
+	github.com/go-jose/go-jose/v4 v4.0.5 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/henvic/httpretty v0.0.6 // indirect
@@ -38,8 +37,8 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.13.1 // indirect
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0 // indirect
-	github.com/sigstore/sigstore v1.8.12 // indirect
-	github.com/sigstore/sigstore-go v0.7.0 // indirect
+	github.com/sigstore/sigstore v1.9.1 // indirect
+	github.com/sigstore/sigstore-go v0.7.2 // indirect
 	github.com/spdx/tools-golang v0.5.5 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e // indirect
