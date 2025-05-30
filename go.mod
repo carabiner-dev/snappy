@@ -6,7 +6,7 @@ require (
 	github.com/carabiner-dev/ampel v0.0.1-pre9
 	github.com/carabiner-dev/hasher v0.2.2
 	github.com/carabiner-dev/yamplate v0.1.1
-	github.com/cli/go-gh/v2 v2.12.0
+	github.com/cli/go-gh/v2 v2.12.1
 	github.com/in-toto/attestation v1.1.2-0.20250128181946-c0b4d86cf712
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
