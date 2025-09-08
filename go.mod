@@ -6,11 +6,11 @@ require (
 	github.com/carabiner-dev/ampel v0.0.1-pre9
 	github.com/carabiner-dev/hasher v0.2.2
 	github.com/carabiner-dev/yamplate v0.1.1
-	github.com/cli/go-gh/v2 v2.12.1
+	github.com/cli/go-gh/v2 v2.12.2
 	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
-	sigs.k8s.io/release-utils v0.12.0
+	sigs.k8s.io/release-utils v0.12.1
 )
 
 require (
