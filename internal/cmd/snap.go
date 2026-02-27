@@ -16,6 +16,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
+	"github.com/carabiner-dev/snappy/pkg/platform"
 	"github.com/carabiner-dev/snappy/pkg/snap"
 )
 
@@ -23,6 +24,7 @@ type snapOptions struct {
 	SpecPath         string
 	Attest           bool
 	VarSubstitutions []string
+	Platform         string
 }
 
 // Validates the options in context with arguments
@@ -37,6 +39,14 @@ func (to *snapOptions) Validate() error {
 			errs = append(errs, fmt.Errorf("variable substitution not well formed: %q", val))
 		}
 	}
+
+	// Validate platform if specified
+	if to.Platform != "" {
+		if to.Platform != string(platform.GitHub) && to.Platform != string(platform.GitLab) {
+			errs = append(errs, fmt.Errorf("invalid platform: %q (must be 'github' or 'gitlab')", to.Platform))
+		}
+	}
+
 	return errors.Join(errs...)
 }
 
@@ -50,6 +60,9 @@ func (to *snapOptions) AddFlags(cmd *cobra.Command) {
 	)
 	cmd.PersistentFlags().StringSliceVarP(
 		&to.VarSubstitutions, "var", "v", []string{}, "spec variable subsitutions (--var name=value)",
+	)
+	cmd.PersistentFlags().StringVarP(
+		&to.Platform, "platform", "p", "", "platform: github or gitlab (auto-detected if not specified)",
 	)
 }
 
@@ -111,6 +124,10 @@ func addSnap(parentCmd *cobra.Command, specsFS *embed.FS) {
 
 			// Create a snapper
 			snapper := snap.New()
+			snapper.Options.SpecPath = opts.SpecPath
+			if opts.Platform != "" {
+				snapper.Options.Platform = platform.Type(opts.Platform)
+			}
 			// ... and snapshot the repo
 			snapshot, err := snapper.Take(context.Background(), spec)
 			if err != nil {

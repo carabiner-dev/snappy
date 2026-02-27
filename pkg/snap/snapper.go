@@ -6,30 +6,37 @@ package snap
 import (
 	"context"
 	"fmt"
+
+	"github.com/carabiner-dev/snappy/pkg/platform"
 )
 
 func New() *Snapper {
 	return &Snapper{
 		Options:        defaultOptions,
 		implementation: &defaultImplementation{},
+		detector:       platform.NewDetector(),
 	}
 }
 
 var defaultOptions = Options{
-	ResponseHeaders: []string{
-		"Date", "Etag", "Server", "X-Accepted-Oauth-Scopes",
-		"X-Github-Api-Version-Selected", "X-Github-Request-Id",
-	},
+	ResponseHeaders: []string{},
 }
 
 type Options struct {
 	// ResponseHeaders is the list of response headers the snapper will record
 	ResponseHeaders []string
+
+	// Platform is the explicitly selected platform (optional, auto-detected if not set)
+	Platform platform.Type
+
+	// SpecPath is the path to the spec file (used for auto-detection)
+	SpecPath string
 }
 
 type Snapper struct {
 	Options        Options
 	implementation SnapperImplementation
+	detector       *platform.Detector
 }
 
 // Take grabs a snapshot of the repo status
@@ -37,7 +44,38 @@ func (s *Snapper) Take(ctx context.Context, spec *Spec) (*Snapshot, error) {
 	if err := s.implementation.ValidateSpec(spec); err != nil {
 		return nil, fmt.Errorf("validating spec: %w", err)
 	}
-	client, err := s.implementation.GetClient()
+
+	// Determine platform type
+	platformType := s.Options.Platform
+	if platformType == "" {
+		// Try to detect from spec path first
+		if s.Options.SpecPath != "" {
+			detected, err := s.detector.DetectFromSpec(s.Options.SpecPath)
+			if err == nil {
+				platformType = detected
+			}
+		}
+		// Fallback to detecting from endpoint
+		if platformType == "" {
+			detected, err := s.detector.DetectFromEndpoint(spec.Endpoint)
+			if err != nil {
+				return nil, fmt.Errorf("could not auto-detect platform, please specify --platform flag: %w", err)
+			}
+			platformType = detected
+		}
+	}
+
+	// Get platform factory and set default headers if not configured
+	factory, err := platform.Get(platformType)
+	if err != nil {
+		return nil, fmt.Errorf("getting platform factory: %w", err)
+	}
+	if len(s.Options.ResponseHeaders) == 0 {
+		s.Options.ResponseHeaders = factory.DefaultResponseHeaders()
+	}
+
+	// Create client for the detected/specified platform
+	client, err := s.implementation.GetClient(platformType)
 	if err != nil {
 		return nil, fmt.Errorf("creating api client: %w", err)
 	}
