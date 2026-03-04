@@ -34,8 +34,8 @@ github.com/carabiner-dev/signer v0.3.7 h1:oEmOg17Szs5+x0oVVGXluPNsVaQyROlXrBPxgw
 github.com/carabiner-dev/signer v0.3.7/go.mod h1:gReZbCZlINz8Pm/hrD1HtRcGFaO9MGUAu/v+iZp7R6Y=
 github.com/carabiner-dev/vcslocator v0.4.0 h1:HxU8F7FWJatnIhR6NowsPpfki8xw2uNDRLuikcBHFao=
 github.com/carabiner-dev/vcslocator v0.4.0/go.mod h1:B3JFnwypdrRVQPJKNK3BOlRw6DbgmsiHGmoT3ZELpp8=
-github.com/carabiner-dev/yamplate v0.1.1 h1:MxVylWPKUTDGBYAEKDunpiU1/Ry8+1S57KEmlKDr1xw=
-github.com/carabiner-dev/yamplate v0.1.1/go.mod h1:8BtiGbRjsBd8KWQO4vNqrbIZxmx2mvp20JWjd2pd/1o=
+github.com/carabiner-dev/yamplate v0.1.2 h1:dYmlT/kXTQ3QviYk0bswFSrWU5kmttuFkd95NY8calo=
+github.com/carabiner-dev/yamplate v0.1.2/go.mod h1:qyRUQzoce92vrcKkKCEK94jTx+Jo5W4PdHXiC7VOCU0=
 github.com/cli/go-gh/v2 v2.13.0 h1:jEHZu/VPVoIJkciK3pzZd3rbT8J90swsK5Ui4ewH1ys=
 github.com/cli/go-gh/v2 v2.13.0/go.mod h1:Us/NbQ8VNM0fdaILgoXSz6PKkV5PWaEzkJdc9vR2geM=
 github.com/cli/safeexec v1.0.0 h1:0VngyaIyqACHdcMNWfo6+KdUYnqEr2Sg+bSP1pdF+dI=

@@ -6,7 +6,7 @@ require (
 	github.com/carabiner-dev/attestation v0.2.0
 	github.com/carabiner-dev/collector v0.2.8
 	github.com/carabiner-dev/hasher v0.2.3
-	github.com/carabiner-dev/yamplate v0.1.1
+	github.com/carabiner-dev/yamplate v0.1.2
 	github.com/cli/go-gh/v2 v2.13.0
 	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.4
