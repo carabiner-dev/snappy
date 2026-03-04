@@ -9,6 +9,8 @@ import (
 	"net/http"
 
 	"github.com/cli/go-gh/v2/pkg/api"
+
+	"github.com/carabiner-dev/snappy/pkg/platform"
 )
 
 // Replaceable caller interface
@@ -51,4 +53,8 @@ type Client struct {
 
 func (c *Client) Call(ctx context.Context, method, path string, body io.Reader) (*http.Response, error) {
 	return c.caller.RequestWithContext(ctx, method, path, body)
+}
+
+func (c *Client) Platform() platform.Type {
+	return platform.GitHub
 }

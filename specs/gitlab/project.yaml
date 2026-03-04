@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
+# SPDX-License-Identifier: Apache-2.0
+---
+id: ${HOST}/${GROUP}/${PROJECT}
+name: ${HOST}/${GROUP}/${PROJECT}
+url: git+https://${HOST}/${GROUP}/${PROJECT}
+type: http://github.com/carabiner-dev/snappy/specs/gitlab/project.yaml
+endpoint: projects/${GROUP}%2F${PROJECT}
+method: GET
+mask:
+  # Identity
+  - id
+  - name
+  - path
+  - path_with_namespace
+  - description
+  - namespace
+  # Status & Visibility
+  - visibility
+  - archived
+  - created_at
+  - last_activity_at
+  # Repository Info
+  - default_branch
+  - topics
+  - tag_list
+  - forks_count
+  - star_count
+  # URLs
+  - web_url
+  - http_url_to_repo
+  - ssh_url_to_repo
+  # Feature Flags
+  - issues_enabled
+  - merge_requests_enabled
+  - wiki_enabled
+  - jobs_enabled
+  - lfs_enabled
+  - shared_runners_enabled
+  # Merge & CI Settings
+  - only_allow_merge_if_pipeline_succeeds
+  - only_allow_merge_if_all_discussions_are_resolved
+  - remove_source_branch_after_merge
+  - merge_method
+  - squash_option
+  - approvals_before_merge

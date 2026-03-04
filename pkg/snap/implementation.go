@@ -15,13 +15,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/carabiner-dev/snappy/pkg/github"
+	"github.com/carabiner-dev/snappy/pkg/platform"
 )
 
 type SnapperImplementation interface {
 	ValidateSpec(*Spec) error
-	GetClient() (*github.Client, error)
-	CallAPI(context.Context, *github.Client, *Spec) (*http.Response, error)
+	GetClient(platform.Type) (platform.Client, error)
+	CallAPI(context.Context, platform.Client, *Spec) (*http.Response, error)
 	ParseResponse(*Options, *Spec, *http.Response) (*Snapshot, error)
 	ApplyFieldMask(*Snapshot, []string) (*Snapshot, error)
 }
@@ -33,11 +33,11 @@ func (di *defaultImplementation) ValidateSpec(spec *Spec) error {
 	return spec.Validate()
 }
 
-func (di *defaultImplementation) GetClient() (*github.Client, error) {
-	return github.NewClient()
+func (di *defaultImplementation) GetClient(platformType platform.Type) (platform.Client, error) {
+	return platform.GetClient(platformType)
 }
 
-func (di *defaultImplementation) CallAPI(ctx context.Context, client *github.Client, spec *Spec) (*http.Response, error) {
+func (di *defaultImplementation) CallAPI(ctx context.Context, client platform.Client, spec *Spec) (*http.Response, error) {
 	var r io.Reader
 	if spec.Data != "" {
 		data := spec.Data
