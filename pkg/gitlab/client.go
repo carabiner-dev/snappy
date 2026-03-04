@@ -55,7 +55,7 @@ func (c *Client) Call(ctx context.Context, method, path string, body io.Reader) 
 	}
 
 	// Make request
-	resp, err := c.httpClient.Do(req)
+	resp, err := c.httpClient.Do(req) //nolint:gosec // G704: Expected external input
 	if err != nil {
 		return nil, fmt.Errorf("making request: %w", err)
 	}

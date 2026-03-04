@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/carabiner-dev/ampel/pkg/attestation"
-	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
+	"github.com/carabiner-dev/attestation"
+	"github.com/carabiner-dev/collector/statement/intoto"
 	"github.com/carabiner-dev/hasher"
 	gointoto "github.com/in-toto/attestation/go/v1"
 	"github.com/sirupsen/logrus"
@@ -64,17 +64,25 @@ func (s *Snapshot) GetSource() attestation.Subject {
 	return nil
 }
 
-func (s *Snapshot) GetVerifications() []*attestation.SignatureVerification {
+func (s *Snapshot) GetVerification() attestation.Verification {
 	return nil
+}
+
+func (s *Snapshot) SetVerification(attestation.Verification) {
+}
+
+func (s *Snapshot) GetOrigin() attestation.Subject {
+	return &gointoto.ResourceDescriptor{
+		Name: s.Name,
+		Uri:  s.Url,
+	}
+}
+
+func (s *Snapshot) SetOrigin(attestation.Subject) {
 }
 
 // AsStatement converts the snapshot to an intoto attestation
 func (s *Snapshot) AsStatement() attestation.Statement {
-	// Create the attestation with the snapshot as predicate
-	statement := intoto.NewStatement(
-		intoto.WithPredicate(s),
-	)
-
 	// Create a hasher to hash the ID
 	reader := strings.NewReader(s.ID)
 	hshr := hasher.New()
@@ -99,6 +107,12 @@ func (s *Snapshot) AsStatement() attestation.Statement {
 		sbj.Name = s.Name
 		sbj.Uri = s.Url
 	}
+
+	// Create the attestation with the snapshot as predicate
+	statement := intoto.NewStatement(
+		intoto.WithPredicate(s),
+		intoto.WithSubject(sbj),
+	)
 
 	statement.AddSubject(sbj)
 	return statement
