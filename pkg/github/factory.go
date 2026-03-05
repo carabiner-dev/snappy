@@ -5,10 +5,6 @@ package github
 
 import "github.com/carabiner-dev/snappy/pkg/platform"
 
-func init() {
-	platform.Register(NewFactory())
-}
-
 type Factory struct{}
 
 func NewFactory() *Factory {

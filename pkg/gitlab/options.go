@@ -15,17 +15,16 @@ type Options struct {
 	TokenReader TokenReader
 }
 
-var defaultOptions = Options{
-	Host:        getDefaultHost(),
-	TokenReader: &EnvTokenReader{VarName: "GITLAB_TOKEN"},
-}
-
-// getDefaultHost returns the GitLab host from GITLAB_HOST env var, or gitlab.com
-func getDefaultHost() string {
-	if host := os.Getenv("GITLAB_HOST"); host != "" {
-		return host
+func getDefaultOptions() Options {
+	host := "gitlab.com"
+	if envHost := os.Getenv("GITLAB_HOST"); envHost != "" {
+		host = envHost
 	}
-	return "gitlab.com"
+
+	return Options{
+		Host:        host,
+		TokenReader: &EnvTokenReader{VarName: "GITLAB_TOKEN"},
+	}
 }
 
 // ensureToken makes sure we have a token. If there is none set, we
