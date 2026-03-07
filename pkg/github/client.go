@@ -26,7 +26,7 @@ func buildGithubRestClient(opts Options) (*api.RESTClient, error) {
 }
 
 func NewClient() (*Client, error) {
-	return NewClientWithOptions(defaultOptions)
+	return NewClientWithOptions(getDefaultOptions())
 }
 
 func NewClientWithOptions(opts Options) (*Client, error) {

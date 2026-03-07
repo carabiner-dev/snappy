@@ -11,7 +11,6 @@ var (
 )
 
 // Register registers a platform factory
-// This is typically called from init() functions in platform packages
 func Register(factory Factory) {
 	mu.Lock()
 	defer mu.Unlock()

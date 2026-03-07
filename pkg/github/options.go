@@ -14,11 +14,13 @@ type Options struct {
 	TokenReader TokenReader
 }
 
-var defaultOptions = Options{
-	Host: "api.github.com",
-	TokenReader: &EnvTokenReader{
-		VarName: "GITHUB_TOKEN",
-	},
+func getDefaultOptions() Options {
+	return Options{
+		Host: "api.github.com",
+		TokenReader: &EnvTokenReader{
+			VarName: "GITHUB_TOKEN",
+		},
+	}
 }
 
 // ensureToken makes sure we have a token. If there is none set, we

@@ -10,16 +10,13 @@ import (
 	"github.com/carabiner-dev/snappy/pkg/platform"
 )
 
+// New creates a new Snapper
 func New() *Snapper {
 	return &Snapper{
-		Options:        defaultOptions,
+		Options:        Options{},
 		implementation: &defaultImplementation{},
 		detector:       platform.NewDetector(),
 	}
-}
-
-var defaultOptions = Options{
-	ResponseHeaders: []string{},
 }
 
 type Options struct {
