@@ -4,7 +4,7 @@
 id: github.com/${ORG}/${REPO}@${REF}
 name: github.com/${ORG}/${REPO}@${REF}
 url: git+https://github.com/${ORG}/${REPO}/@${REF}
-type: http://github.com/carabiner-dev/snappy/specs/commit.yaml
+type: http://github.com/carabiner-dev/snappy/specs/github/commit.yaml
 endpoint: repos/${ORG}/${REPO}/commits/${REF}
 method:  GET
 mask:

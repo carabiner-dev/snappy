@@ -4,7 +4,7 @@
 id: github.com/${ORG}
 name: github.com/${ORG}
 url: https://github.com/${ORG}
-type: http://github.com/carabiner-dev/snappy/specs/org.yaml
+type: http://github.com/carabiner-dev/snappy/specs/github/org.yaml
 endpoint: orgs/${ORG}
 method:  GET
 mask:
