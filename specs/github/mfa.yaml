@@ -4,7 +4,7 @@
 id: github.com/${ORG}
 name: github.com/${ORG}
 url: https://github.com/${ORG}
-type: http://github.com/carabiner-dev/snappy/specs/mfa.yaml
+type: http://github.com/carabiner-dev/snappy/specs/github/mfa.yaml
 endpoint: graphql 
 method:  POST
 mask:
