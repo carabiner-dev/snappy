@@ -5,7 +5,7 @@ id: ${HOST}/${GROUP}/${PROJECT}@${BRANCH}
 name: ${HOST}/${GROUP}/${PROJECT}@${BRANCH}
 url: git+https://${HOST}/${GROUP}/${PROJECT}/@${BRANCH}
 type: http://github.com/carabiner-dev/snappy/specs/gitlab/branch-protection.yaml
-endpoint: projects/${GROUP}%2F${PROJECT}/protected_branches/${BRANCH}
+endpoint: projects/${GROUP}/${PROJECT}/protected_branches/${BRANCH}
 method: GET
 mask:
   - id

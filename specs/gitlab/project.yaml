@@ -5,7 +5,7 @@ id: ${HOST}/${GROUP}/${PROJECT}
 name: ${HOST}/${GROUP}/${PROJECT}
 url: git+https://${HOST}/${GROUP}/${PROJECT}
 type: http://github.com/carabiner-dev/snappy/specs/gitlab/project.yaml
-endpoint: projects/${GROUP}%2F${PROJECT}
+endpoint: projects/${GROUP}/${PROJECT}
 method: GET
 mask:
   # Identity
