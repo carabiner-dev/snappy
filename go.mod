@@ -8,7 +8,7 @@ require (
 	github.com/carabiner-dev/hasher v0.2.3
 	github.com/carabiner-dev/yamplate v0.1.2
 	github.com/cli/go-gh/v2 v2.13.0
-	github.com/in-toto/attestation v1.1.2
+	github.com/in-toto/attestation v1.2.0
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	sigs.k8s.io/release-utils v0.12.3
