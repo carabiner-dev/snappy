@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/carabiner-dev/attestation v0.2.1
-	github.com/carabiner-dev/collector v0.3.1
+	github.com/carabiner-dev/collector v0.3.2
 	github.com/carabiner-dev/hasher v0.2.3
 	github.com/carabiner-dev/yamplate v0.1.2
 	github.com/cli/go-gh/v2 v2.13.0

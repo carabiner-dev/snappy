@@ -17,8 +17,8 @@ github.com/bradleyjkemp/cupaloy/v2 v2.8.0 h1:any4BmKE+jGIaMpnU8YgH/I2LPiLBufr6oM
 github.com/bradleyjkemp/cupaloy/v2 v2.8.0/go.mod h1:bm7JXdkRd4BHJk9HpwqAI8BoAY1lps46Enkdqw6aRX0=
 github.com/carabiner-dev/attestation v0.2.1 h1:VhjV5YlO9TsW50Sr/Zd54bdbZhhDAqgxC3kB9z1I+3Q=
 github.com/carabiner-dev/attestation v0.2.1/go.mod h1:O84vF84RZG3pJO/6BYrPs718bZviHF5DKajP1HsrDpw=
-github.com/carabiner-dev/collector v0.3.1 h1:TlQQGDBhmcmLKkb+SP/KIAXO2xcYUZBSvCZwfbEbWZs=
-github.com/carabiner-dev/collector v0.3.1/go.mod h1:7BjwgqqFexfrV9mI+pSQX254nHwH78/GCM6X9M+A1Qo=
+github.com/carabiner-dev/collector v0.3.2 h1:E++bqobHAw4/By9YGrp2Lm+i8+hoLDROG5DJan+FmiQ=
+github.com/carabiner-dev/collector v0.3.2/go.mod h1:7BjwgqqFexfrV9mI+pSQX254nHwH78/GCM6X9M+A1Qo=
 github.com/carabiner-dev/hasher v0.2.3 h1:678/FKyUJexzDznoIomnW/Z71hoL6Ehz99W2ZP2ACxE=
 github.com/carabiner-dev/hasher v0.2.3/go.mod h1:TRannDvJs5eL61xA/K/whtYbZLQPb/CGFXtDnx4h37M=
 github.com/carabiner-dev/openeox v0.0.0-20260302211234-88fe8a305401 h1:fexoMxtBCeYSxNJcd0wTAO3rYyq77wv7AqnNrEyo0JI=
