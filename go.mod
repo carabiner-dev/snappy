@@ -1,6 +1,6 @@
 module github.com/carabiner-dev/snappy
 
-go 1.26.0
+go 1.26.1
 
 require (
 	github.com/carabiner-dev/attestation v0.2.1
