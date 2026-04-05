@@ -4,14 +4,14 @@ go 1.26.1
 
 require (
 	github.com/carabiner-dev/attestation v0.2.1
-	github.com/carabiner-dev/collector v0.3.1
+	github.com/carabiner-dev/collector v0.3.3
 	github.com/carabiner-dev/hasher v0.2.3
 	github.com/carabiner-dev/yamplate v0.1.2
 	github.com/cli/go-gh/v2 v2.13.0
 	github.com/in-toto/attestation v1.2.0
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
-	sigs.k8s.io/release-utils v0.12.3
+	sigs.k8s.io/release-utils v0.12.4
 )
 
 require (
@@ -24,7 +24,7 @@ require (
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
 	github.com/carabiner-dev/policy v0.4.2 // indirect
 	github.com/carabiner-dev/predicates v0.1.0 // indirect
-	github.com/carabiner-dev/signer v0.4.1 // indirect
+	github.com/carabiner-dev/signer v0.4.2 // indirect
 	github.com/carabiner-dev/vcslocator v0.4.0 // indirect
 	github.com/cli/safeexec v1.0.0 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
@@ -34,7 +34,7 @@ require (
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.8.0 // indirect
-	github.com/go-git/go-git/v5 v5.17.0 // indirect
+	github.com/go-git/go-git/v5 v5.17.2 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -47,7 +47,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nozzle/throttler v0.0.0-20180817012639-2ea982251481 // indirect
-	github.com/openvex/go-vex v0.2.7 // indirect
+	github.com/openvex/go-vex v0.2.8 // indirect
 	github.com/package-url/packageurl-go v0.1.5 // indirect
 	github.com/pjbgf/sha1cd v0.5.0 // indirect
 	github.com/protobom/protobom v0.5.4 // indirect
