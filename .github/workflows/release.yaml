@@ -9,7 +9,7 @@ on:
       - 'v*'
 permissions:
   contents: read
-  
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -18,31 +18,29 @@ jobs:
       contents: write
       id-token: write
       attestations: write
-      
+
     steps:
       - name: Setup bnd
-        uses: carabiner-dev/bnd-actions/setup@HEAD
+        uses: carabiner-dev/actions/install/bnd@7d7c2b1154a01df68e3fc4f12d07fd148a302a94 # v1.1.4
 
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 1
+          persist-credentials: false
 
-      - uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version-file: go.mod
           cache: false
 
       - name: Install tejolote
-        uses: kubernetes-sigs/release-actions/setup-tejolote@8af7b2a5596dff526de9db59b2c4b8457e9f52a1 # v0.4.0
-
-      - name: Install bom
-        uses: kubernetes-sigs/release-actions/setup-bom@8af7b2a5596dff526de9db59b2c4b8457e9f52a1 # v0.4.0
+        uses: kubernetes-sigs/release-actions/setup-tejolote@cead1599f005647418bc8fd4a1c8c174485d4016 # v0.4.2
 
       - name: Set tag output
         id: tag
         run: echo "tag_name=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
-  
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@ec59f474b9834571250b370d4735c50f8e2d1e29 # v7.0.0
         id: goreleaser
@@ -63,10 +61,16 @@ jobs:
             bnd push ${{github.repository}} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
 
       - name: Generate SBOM
+        id: sbom
+        uses: carabiner-dev/actions/unpack/sbom@7d7c2b1154a01df68e3fc4f12d07fd148a302a94 # v1.1.4
+        with:
+          output-path: /tmp
+
+      - name: Upload SBOM
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          bom generate --format=json -o /tmp/snappy-${{ steps.tag.outputs.tag_name }}.spdx.json .
-          gh release upload ${{ steps.tag.outputs.tag_name }} /tmp/snappy-${{ steps.tag.outputs.tag_name }}.spdx.json
-          
+          for f in ${{ steps.sbom.outputs.files }}; do
+            gh release upload ${{ steps.tag.outputs.tag_name }} "$f"
+          done
