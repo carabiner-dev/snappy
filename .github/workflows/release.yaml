@@ -70,7 +70,8 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          SBOM_FILES: ${{ steps.sbom.outputs.files }}
         run: |
-          for f in ${{ steps.sbom.outputs.files }}; do
+          for f in ${SBOM_FILES}; do
             gh release upload ${{ steps.tag.outputs.tag_name }} "$f"
           done
