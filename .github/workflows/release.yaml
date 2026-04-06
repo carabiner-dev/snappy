@@ -35,7 +35,7 @@ jobs:
           cache: false
 
       - name: Install tejolote
-        uses: kubernetes-sigs/release-actions/setup-tejolote@cead1599f005647418bc8fd4a1c8c174485d4016 # v0.4.2
+        uses: kubernetes-sigs/release-actions/setup-tejolote@cbe0488670ad0c0ff422fbef963da3bfe451a891 # v0.4.2
 
       - name: Set tag output
         id: tag
