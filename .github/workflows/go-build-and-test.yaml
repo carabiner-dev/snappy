@@ -18,7 +18,7 @@ jobs:
 
     - name: Resolve Go versions
       id: go-versions
-      uses: carabiner-dev/actions/go/versions@39b23130c953accf83eb42b5d717800da5db8453 # v1.1.5
+      uses: carabiner-dev/actions/go/versions@ba6f58b7120233bc312a76fb6bf3397704bcdcef # v1.1.5
 
     - name: Set up Go
       uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
