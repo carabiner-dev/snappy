@@ -117,6 +117,7 @@ func isDefinitelyGitLabResource(segment string) bool {
 		"repository", "branches", "commits", "tags", "tree",
 		"members", "variables", "pipelines", "jobs", "artifacts",
 		"runners", "hooks", "labels", "milestones", "releases",
+		"approvals",
 	}
 
 	for _, resource := range unambiguousResources {
