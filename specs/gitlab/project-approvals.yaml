@@ -5,7 +5,7 @@ id: ${HOST}/${GROUP}/${PROJECT}/approvals
 name: ${HOST}/${GROUP}/${PROJECT}/approvals
 url: git+https://${HOST}/${GROUP}/${PROJECT}
 type: http://github.com/carabiner-dev/snappy/specs/gitlab/project-approvals.yaml
-endpoint: projects/${GROUP}%2F${PROJECT}/approvals
+endpoint: projects/${GROUP}/${PROJECT}/approvals
 method: GET
 mask:
   - approvals_before_merge
