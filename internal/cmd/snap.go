@@ -94,7 +94,7 @@ func addSnap(parentCmd *cobra.Command, specsFS *embed.FS) {
 
 			var f io.ReadCloser
 			if strings.HasPrefix(opts.SpecPath, "builtin:") {
-				f, err = specsFS.Open("specs/" + strings.TrimPrefix(opts.SpecPath, "builtin:"))
+				f, err = specsFS.Open(strings.TrimPrefix(opts.SpecPath, "builtin:"))
 				if err != nil {
 					return fmt.Errorf("opening internal spec: %w", err)
 				}
