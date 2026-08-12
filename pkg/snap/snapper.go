@@ -28,6 +28,14 @@ type Options struct {
 
 	// SpecPath is the path to the spec file (used for auto-detection)
 	SpecPath string
+
+	// Client is a pre-built API client the snapper uses instead of creating
+	// one through the platform registry. Set it when the credentials come from
+	// somewhere other than the process environment — for example a server
+	// seeding each call with a short-lived installation token. When set, its
+	// platform also resolves the snapshot defaults unless Platform is set
+	// explicitly.
+	Client platform.Client
 }
 
 type Snapper struct {
@@ -44,6 +52,10 @@ func (s *Snapper) Take(ctx context.Context, spec *Spec) (*Snapshot, error) {
 
 	// Determine platform type
 	platformType := s.Options.Platform
+	if platformType == "" && s.Options.Client != nil {
+		// A pre-built client knows its platform.
+		platformType = s.Options.Client.Platform()
+	}
 	if platformType == "" {
 		// Try to detect from spec path first
 		if s.Options.SpecPath != "" {
@@ -71,10 +83,13 @@ func (s *Snapper) Take(ctx context.Context, spec *Spec) (*Snapshot, error) {
 		s.Options.ResponseHeaders = factory.DefaultResponseHeaders()
 	}
 
-	// Create client for the detected/specified platform
-	client, err := s.implementation.GetClient(platformType)
-	if err != nil {
-		return nil, fmt.Errorf("creating api client: %w", err)
+	// Use the pre-built client or create one for the detected/specified platform
+	client := s.Options.Client
+	if client == nil {
+		client, err = s.implementation.GetClient(platformType)
+		if err != nil {
+			return nil, fmt.Errorf("creating api client: %w", err)
+		}
 	}
 
 	resp, err := s.implementation.CallAPI(ctx, client, spec)
