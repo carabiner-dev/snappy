@@ -109,11 +109,8 @@ func (s *Snapshot) AsStatement() attestation.Statement {
 	}
 
 	// Create the attestation with the snapshot as predicate
-	statement := intoto.NewStatement(
+	return intoto.NewStatement(
 		intoto.WithPredicate(s),
 		intoto.WithSubject(sbj),
 	)
-
-	statement.AddSubject(sbj)
-	return statement
 }
