@@ -4,7 +4,7 @@ go 1.26.1
 
 require (
 	github.com/carabiner-dev/attestation v0.2.1
-	github.com/carabiner-dev/collector v0.3.16
+	github.com/carabiner-dev/collector v0.3.17
 	github.com/carabiner-dev/hasher v0.2.4
 	github.com/carabiner-dev/yamplate v0.1.3
 	github.com/cli/go-gh/v2 v2.16.1
@@ -24,8 +24,8 @@ require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/carabiner-dev/openeox v1.0.0 // indirect
 	github.com/carabiner-dev/osv v0.1.2 // indirect
-	github.com/carabiner-dev/policy v0.5.5 // indirect
-	github.com/carabiner-dev/predicates v0.5.1 // indirect
+	github.com/carabiner-dev/policy v0.5.6 // indirect
+	github.com/carabiner-dev/predicates v0.5.4 // indirect
 	github.com/carabiner-dev/signer v0.6.2 // indirect
 	github.com/carabiner-dev/spdx3 v0.1.0 // indirect
 	github.com/carabiner-dev/vcslocator v0.5.0 // indirect
@@ -72,6 +72,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.30.0 // indirect
 	github.com/henvic/httpretty v0.2.0 // indirect
+	github.com/hjson/hjson-go/v4 v4.7.1 // indirect
 	github.com/in-toto/in-toto-golang v0.11.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
@@ -108,12 +109,10 @@ require (
 	github.com/transparency-dev/formats v0.1.1 // indirect
 	github.com/transparency-dev/merkle v0.0.2 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
-	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.45.0 // indirect
 	go.opentelemetry.io/otel/metric v1.45.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v1.45.0 // indirect
 	go.opentelemetry.io/otel/trace v1.45.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
