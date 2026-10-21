@@ -56,22 +56,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             tejolote attest --artifacts github://${{github.repository}}/${{ steps.tag.outputs.tag_name }} github://${{github.repository}}/"${GITHUB_RUN_ID}" --output provenance.json
-            bnd statement provenance.json -o snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
-            gh release upload ${{ steps.tag.outputs.tag_name }} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
-            bnd push ${{github.repository}} snappy-${{ steps.tag.outputs.tag_name }}.provenance.json
+            bnd statement provenance.json -o provenance.bundle.json
+            # Open the release attestations file: JSONL, one sigstore bundle
+            # per line. bnd writes the bundle as single-line JSON without a
+            # trailing newline; the perl pass flattens defensively and
+            # terminates the record.
+            perl -0777 -pe 's/\s*\n\s*//g; $_ .= "\n"' provenance.bundle.json > attestations.intoto.jsonl
 
       - name: Generate SBOM
         id: sbom
-        uses: carabiner-dev/actions/unpack/sbom@d41fe10fe88deaf493ce026007da73738b9f570c # v1.3.0
+        uses: carabiner-dev/actions/sbom/source@d41fe10fe88deaf493ce026007da73738b9f570c # v1.3.0
         with:
+          sign: "true"
           output-path: /tmp
 
-      - name: Upload SBOM
+      - name: Upload attestations
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           SBOM_FILES: ${{ steps.sbom.outputs.files }}
         run: |
+          # Append the signed SBOM bundles to the attestations file and
+          # publish the whole set: one sigstore bundle per line.
           for f in ${SBOM_FILES}; do
-            gh release upload ${{ steps.tag.outputs.tag_name }} "$f"
+            perl -0777 -pe 's/\s*\n\s*//g; $_ .= "\n"' "$f" >> attestations.intoto.jsonl
           done
+          gh release upload ${{ steps.tag.outputs.tag_name }} attestations.intoto.jsonl
+          bnd push ${{github.repository}} attestations.intoto.jsonl

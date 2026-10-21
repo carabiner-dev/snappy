@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/carabiner-dev/attestation"
-	"github.com/carabiner-dev/collector/statement/intoto"
+	"github.com/policylabs/attestation"
+	"github.com/policylabs/collector/statement/intoto"
 	"github.com/carabiner-dev/hasher"
 	gointoto "github.com/in-toto/attestation/go/v1"
 	"github.com/sirupsen/logrus"
